@@ -19,6 +19,23 @@ class Notification
         $this->conn = $db;
     }
 
+    private function validate($data)
+    {
+        if (empty($data['type']) || empty($data['message']) || empty($data['scheduling_date']) || empty($data['interval_minutes'])) {
+            return false;
+        }
+
+        if ($data['type'] === 'email' && empty($data['recipient_email'])) {
+            return false;
+        }
+
+        if (($data['type'] === 'whatsapp' || $data['type'] === 'sms') && empty($data['recipient_phone'])) {
+            return false;
+        }
+
+        return true;
+    }
+
     public function create()
     {
         $query = "INSERT INTO {$this->table_name} (type, recipient_name, message, scheduling_date, status, created_at, updated_at) VALUES (:type, :recipient_name, :message, :scheduling_date, :status)";

@@ -22,12 +22,14 @@ final class CreateNotificationTable extends AbstractMigration
         $table->addColumn('id', 'integer', ['identity' => true])
             ->addIndex('id', ['unique' => true])
             ->addColumn('type', 'enum', ['values' => ['email', 'whatsapp', 'sms'], 'null' => false])
-            ->addColumn('recipient_name', 'string', ['limit' => 255, 'null' => false])
+            ->addColumn('recipient_email', 'string', ['limit' => 255, 'null' => true])
+            ->addColumn('recipient_phone', 'string', ['limit' => 20, 'null' => true])
             ->addColumn('message', 'text', ['null' => false])
-            ->addColumn('scheduling_date', 'datetime',['null' => false])
-            ->addColumn('status', 'enum', ['values' => ['pending', 'sent', 'failed']])
-            ->addColumn('created_at', 'datetime')
-            ->addColumn('updated_at', 'datetime')
+            ->addColumn('scheduling_date', 'datetime', ['null' => false])
+            ->addColumn('interval_minutes', 'integer', ['null' => false])
+            ->addColumn('status', 'enum', ['values' => ['pending', 'sent', 'failed'], 'null' => false])
+            ->addColumn('created_at', 'datetime', ['null' => false])
+            ->addColumn('updated_at', 'datetime', ['null' => false])
             ->create();
     }
 }
