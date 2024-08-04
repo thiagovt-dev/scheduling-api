@@ -1,0 +1,19 @@
+{
+  "name": "thiagovt/scheduling-api-php",
+  "autoload": {
+    "psr-4": {
+      "Thiagovt\\SchedulingApiPhp\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Thiago Vasconcelos",
+      "email": "thiagovt.dev@gmail.com"
+    }
+  ],
+  "require": {
+    "robmorgan/phinx": "^0.16.2"
+  },
+  "license": "MIT",
+  "minimum-stability": "stable"
+}
