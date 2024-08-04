@@ -18,11 +18,11 @@ final class CreateServiceBookingTable extends AbstractMigration
      */
     public function change(): void
     {
-        $table = $this->table('ServiceBooking');
-        $table->addColumn('cliente_nome', 'string', ['limit' => 255])
-            ->addColumn('cliente_email', 'string', ['limit' => 255])
-            ->addColumn('cliente_telefone', 'string', ['limit' => 20])
-            ->addColumn('serviço', 'string', ['limit' => 255])
+        $table = $this->table('service_booking');
+        $table->addColumn('client_name', 'string', ['limit' => 255])
+            ->addColumn('client_email', 'string', ['limit' => 255])
+            ->addColumn('client_phone', 'string', ['limit' => 20])
+            ->addColumn('service', 'string', ['limit' => 255])
             ->addColumn('data_hora', 'datetime')
             ->addColumn('status', 'string', ['limit' => 50])
             ->create();

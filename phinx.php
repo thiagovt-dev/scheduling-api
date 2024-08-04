@@ -1,26 +1,23 @@
 <?php
 
-require 'vendor/autoload.php';
-
-use Phinx\Config\Config;
-
-$config = new Config([
+return [
     'paths' => [
-        'migrations' => 'database/migrations',
+        'migrations' => '%%PHINX_CONFIG_DIR%%/db/migrations',
+        'seeds' => '%%PHINX_CONFIG_DIR%%/db/seeds'
+
     ],
     'environments' => [
         'default_migration_table' => 'phinxlog',
-        'default_environment' => 'development',
+        'default_database' => 'development',
         'development' => [
-            'adapter' => 'mysql',
+            'adapter' => 'mariaDB',
             'host' => getenv('DATABASE_HOST'),
             'name' => getenv('DATABASE_NAME'),
-            'user' => getenv('DATABASE_USER'),
+            'user' => getenv('DATABASE_USERNAME'),
             'pass' => getenv('DATABASE_PASSWORD'),
             'port' => 3306,
             'charset' => 'utf8',
         ],
     ],
-]);
 
-return $config;
+];
