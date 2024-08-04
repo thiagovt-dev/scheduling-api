@@ -18,13 +18,18 @@ final class CreateServiceBookingTable extends AbstractMigration
      */
     public function change(): void
     {
-        $table = $this->table('service_booking');
-        $table->addColumn('client_name', 'string', ['limit' => 255])
+        $table = $this->table('services_booking');
+        $table->addColumn('id', 'integer', ['identity' => true])
+            ->addIndex('id', ['unique' => true])
+            ->addColumn('client_name', 'string', ['limit' => 255])
             ->addColumn('client_email', 'string', ['limit' => 255])
             ->addColumn('client_phone', 'string', ['limit' => 20])
             ->addColumn('service', 'string', ['limit' => 255])
             ->addColumn('data_hora', 'datetime')
             ->addColumn('status', 'string', ['limit' => 50])
+            ->addColumn('notification_type','enum', ['values' => ['email', 'whatsapp', 'sms']])
+            ->addColumn('created_at', 'datetime')
+            ->addColumn('updated_at', 'datetime')
             ->create();
     }
 }

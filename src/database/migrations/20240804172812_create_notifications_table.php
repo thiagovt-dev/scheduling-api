@@ -18,12 +18,16 @@ final class CreateNotificationTable extends AbstractMigration
      */
     public function change(): void
     {
-        $table = $this->table('notification');
-        $table->addColumn('type', 'enum', ['values' => ['email', 'whatsapp', 'sms']])
+        $table = $this->table('notifications');
+        $table->addColumn('id', 'integer', ['identity' => true])
+            ->addIndex('id', ['unique' => true])
+            ->addColumn('type', 'enum', ['values' => ['email', 'whatsapp', 'sms']])
             ->addColumn('recipient_name', 'string', ['limit' => 255])
             ->addColumn('message', 'text')
             ->addColumn('scheduling_date', 'datetime')
             ->addColumn('status', 'enum', ['values' => ['pending', 'sent', 'failed']])
+            ->addColumn('created_at', 'datetime')
+            ->addColumn('updated_at', 'datetime')
             ->create();
     }
 }
