@@ -1,0 +1,41 @@
+services:
+  php:
+    build: .
+    volumes:
+      - ./src:/var/www/html
+    ports:
+      - "8080:80"
+    depends_on:
+      - mariadb
+
+  mariadb:
+    image: mariadb:10.5
+    container_name: scheduling-db
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DATABASE_PASSWORD}
+      MARIADB_DATABASE: ${DATABASE_NAME}
+      MARIADB_USER: ${DATABASE_USER}
+    ports:
+      - '3306:3306'
+    volumes:
+      - default:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    networks:
+      - default
+    environment:
+      PMA_ARBITRARY: 0
+      PMA_HOST: mariadb
+      MEMORY_LIMIT: 2048M
+      UPLOAD_LIMIT: 2048M
+    ports:
+      - "5000:80"
+    depends_on:
+      - mariadb
+
+volumes:
+  default:
+    driver: local
+    name: scheduling-api-volume
